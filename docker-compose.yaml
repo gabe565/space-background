@@ -2,5 +2,9 @@ version: "3.9"
 
 services:
   app:
-    image: gabe565/space-background
-    build: .
+    image: "gabe565/space-background"
+    build: "."
+    ports:
+      - "80:80"
+    volumes:
+      - ".:/usr/share/nginx/html:ro"
