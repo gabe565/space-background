@@ -72,9 +72,14 @@ function makeParticles() {
     transparent: true
   });
 
+  const zstart = -1000;
+  const zend = 1000;
+  const stars = window.starConf.get('stars') || 200;
+  const zdiff = (zend - zstart) / stars;
+
   // we're gonna move from z position -1000 (far away)
   // to 1000 (where the camera is) and add a random particle at every pos.
-  for (let zpos = -1000; zpos < 1000; zpos += 10) {
+  for (let zpos = zstart; zpos < zend; zpos += zdiff) {
     // we make a particle material and pass through the
     // colour and custom particle render function we defined.
     particle = new THREE.Particle(starMaterial);

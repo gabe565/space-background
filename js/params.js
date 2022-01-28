@@ -1,14 +1,15 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', function() {
-    const params = new URLSearchParams(window.location.search);
-    const bg = document.getElementsByClassName('bg')[0];
+window.starConf = new URLSearchParams(window.location.search);
 
-    if (params.has('transparent')) {
-        bg.classList.add('d-none');
-    }
+document.addEventListener('DOMContentLoaded', function () {
+  const bg = document.getElementsByClassName('bg')[0];
 
-    if (params.has('bg')) {
-        bg.getElementsByTagName('img')[0].src = params.get('bg');
-    }
+  if (starConf.has('transparent')) {
+    bg.classList.add('d-none');
+  }
+
+  if (starConf.has('bg')) {
+    bg.getElementsByTagName('img')[0].src = starConf.get('bg');
+  }
 });
