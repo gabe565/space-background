@@ -1,15 +1,23 @@
 'use strict';
 
-window.starConf = new URLSearchParams(window.location.search);
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  window.starConf = {
+    transparent: params.has('transparent'),
+    background: params.get('bg'),
+    stars: params.get('stars') || 200,
+    speed: (Number(params.get('speed')) || 1) * 0.4,
+  };
+})();
 
 document.addEventListener('DOMContentLoaded', function () {
   const bg = document.getElementsByClassName('bg')[0];
 
-  if (starConf.has('transparent')) {
+  if (starConf.transparent) {
     bg.classList.add('d-none');
   }
 
-  if (starConf.has('bg')) {
-    bg.getElementsByTagName('img')[0].src = starConf.get('bg');
+  if (starConf.background) {
+    bg.getElementsByTagName('img')[0].src = starConf.background;
   }
 });

@@ -16,8 +16,6 @@ let camera, scene, renderer;
 // an array to store our particles in
 const particles = [];
 
-const speed = (Number(window.starConf.get('speed')) || 1) * 0.4;
-
 // let's get going!
 // Go
 init();
@@ -76,8 +74,7 @@ function makeParticles() {
 
   const zstart = -1000;
   const zend = 1000;
-  const stars = window.starConf.get('stars') || 200;
-  const zdiff = (zend - zstart) / stars;
+  const zdiff = (zend - zstart) / starConf.stars;
 
   // we're gonna move from z position -1000 (far away)
   // to 1000 (where the camera is) and add a random particle at every pos.
@@ -115,7 +112,7 @@ function updateParticles() {
   // iterate through every particle
   for (let i = 0; i < particles.length; i++) {
     const particle = particles[i];
-    particle.position.z += speed;
+    particle.position.z += starConf.speed;
     // if the particle is too close move it to the back
     if (particle.position.z > 1000) particle.position.z -= 2000;
   }
