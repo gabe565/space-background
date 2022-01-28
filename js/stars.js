@@ -16,6 +16,8 @@ let camera, scene, renderer;
 // an array to store our particles in
 const particles = [];
 
+const speed = (Number(window.starConf.get('speed')) || 1) * 0.4;
+
 // let's get going!
 // Go
 init();
@@ -113,7 +115,7 @@ function updateParticles() {
   // iterate through every particle
   for (let i = 0; i < particles.length; i++) {
     const particle = particles[i];
-    particle.position.z += 0.4;
+    particle.position.z += speed;
     // if the particle is too close move it to the back
     if (particle.position.z > 1000) particle.position.z -= 2000;
   }
