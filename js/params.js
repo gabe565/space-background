@@ -4,7 +4,7 @@
   const params = new URLSearchParams(window.location.search);
   window.starConf = {
     transparent: params.has('transparent'),
-    background: params.get('bg'),
+    background: params.get('background') || params.get('bg'),
     stars: params.get('stars') || 200,
     speed: (Number(params.get('speed')) || 1) * 0.4,
   };
