@@ -16,11 +16,7 @@ let camera, scene, renderer;
 // an array to store our particles in
 const particles = [];
 
-// let's get going!
-// Go
-init();
-
-function init() {
+const init = () => {
   // Camera params :
   // field of view, aspect ratio for render output, near and far clipping plane.
   camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 1, 2000);
@@ -50,7 +46,7 @@ function init() {
 }
 
 // the main update function, called 30 times a second
-function update() {
+const update = () => {
   updateParticles();
 
   // and render the scene from the perspective of the camera
@@ -60,7 +56,7 @@ function update() {
 }
 
 // creates a random field of Particle objects
-function makeParticles() {
+const makeParticles = () => {
   let particle;
   const starMaterial = new THREE.ParticleBasicMaterial({
     color: 0xFFFFFF,
@@ -110,7 +106,7 @@ function makeParticles() {
 }
 
 // moves all the particles dependent on mouse position
-function updateParticles() {
+const updateParticles = () => {
   // iterate through every particle
   for (let i = 0; i < particles.length; i++) {
     const particle = particles[i];
@@ -119,3 +115,7 @@ function updateParticles() {
     if (particle.position.z > 1000) particle.position.z -= 2000;
   }
 }
+
+// let's get going!
+// Go
+init();
