@@ -76,6 +76,8 @@ function makeParticles() {
   const zend = 1000;
   const zdiff = (zend - zstart) / starConf.stars;
 
+  const r2 = starConf.radius * starConf.radius;
+
   // we're gonna move from z position -1000 (far away)
   // to 1000 (where the camera is) and add a random particle at every pos.
   for (let zpos = zstart; zpos < zend; zpos += zdiff) {
@@ -83,12 +85,12 @@ function makeParticles() {
     // colour and custom particle render function we defined.
     particle = new THREE.Particle(starMaterial);
 
-    // exclude the 400 x 200 region in the center via Monte Carlo sampling
+    // exclude the region in the center via Monte Carlo sampling
     let x, y;
     do {
       x = Math.random() * 2000 - 1000;
       y = Math.random() * 2000 - 1000;
-    } while (-200 < x && x < 200 && -200 < y && y < 200)
+    } while (r2 >= (x * x) + (y * y))
 
     particle.position.x = x;
     particle.position.y = y;

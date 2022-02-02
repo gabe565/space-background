@@ -7,6 +7,7 @@
     background: params.get('background') || params.get('bg'),
     stars: params.get('stars') || 200,
     speed: (Number(params.get('speed')) || 1) * 0.4,
+    radius: params.get('radius') || params.get('r') || 200,
   };
 })();
 
