@@ -55,18 +55,21 @@ const update = () => {
   requestAnimationFrame(update);
 }
 
+const texture = THREE.ImageUtils.loadTexture(
+  "images/star.png"
+);
+
+const starMaterial = () => new THREE.ParticleBasicMaterial({
+  color: 0xFFFFFF,
+  size: 1,
+  map: texture,
+  blending: THREE.AdditiveBlending,
+  transparent: true,
+});
+
 // creates a random field of Particle objects
 const makeParticles = () => {
   let particle;
-  const starMaterial = new THREE.ParticleBasicMaterial({
-    color: 0xFFFFFF,
-    size: 1,
-    map: THREE.ImageUtils.loadTexture(
-      "images/star.png"
-    ),
-    blending: THREE.AdditiveBlending,
-    transparent: true
-  });
 
   const zstart = -1000;
   const zend = 1000;
@@ -79,7 +82,7 @@ const makeParticles = () => {
   for (let zpos = zstart; zpos < zend; zpos += zdiff) {
     // we make a particle material and pass through the
     // colour and custom particle render function we defined.
-    particle = new THREE.Particle(starMaterial);
+    particle = new THREE.Particle(starMaterial());
 
     // exclude the region in the center via Monte Carlo sampling
     let x, y;
@@ -111,8 +114,14 @@ const updateParticles = () => {
   for (let i = 0; i < particles.length; i++) {
     const particle = particles[i];
     particle.position.z += starConf.speed;
+    if (particle.material.opacity < 1) {
+      particle.material.opacity += starConf.speed * 0.005;
+    }
     // if the particle is too close move it to the back
-    if (particle.position.z > 1000) particle.position.z -= 2000;
+    if (particle.position.z > 1000) {
+      particle.position.z -= 2000;
+      particle.material.opacity = 0;
+    }
   }
 }
 
