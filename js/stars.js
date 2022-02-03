@@ -111,8 +111,7 @@ const makeParticles = () => {
 // moves all the particles dependent on mouse position
 const updateParticles = () => {
   // iterate through every particle
-  for (let i = 0; i < particles.length; i++) {
-    const particle = particles[i];
+  for (const particle of particles) {
     particle.position.z += starConf.speed;
     if (particle.material.opacity < 1) {
       particle.material.opacity += starConf.speed * 0.005;
